@@ -8,36 +8,24 @@
     </head>
 <body>
     <header>
+        <h1>Spookmaster's Secret List</h1>
     </header>
     <main>
-    <div class="flex items-center justify-center w-full" style="min-height:700px;">
-    <div class="w-[1600px] max-w-full">
-    <ul id="carousel" class="flex flex-row gap-2 h-[600px] mb-12">
-        <!-- Carousel items will be injected here -->
-    </ul>
-    <div id="carousel-description" class="mt-6 p-4 rounded shadow text-center text-lg min-h-[60px] transition-all duration-500"></div>
+    <div>Test </div>
+    
+
+    <div class="flex items-center justify-center w-full min-h-screen px-2">
+        <div class="w-full max-w-[1400px]">
+            <ul id="carousel" class="flex flex-row gap-0.5 h-[70vw] max-h-[650px] min-h-[250px] mb-8 md:h-[650px] md:max-h-[700px] md:min-h-[450px] lg:h-[700px] lg:max-h-[800px] lg:min-h-[500px]">
+                <!-- Carousel items will be injected here -->
+            </ul>
+            <div id="carousel-description" class="mt-4 p-4 rounded shadow text-center text-base min-h-[60px] transition-all duration-500 md:text-lg"></div>
+        </div>
     </div>
-    </div>
+    <script src="movies.js"></script>
     <script>
       // --- Carousel Setup for Smooth Transitions ---
-      const movies = [
-        { title: "Weapons", img: "assets/weapons.jpg", desc: "So, do they turn into weapons or something funny...? <br><br> Test.", tags: ["Supernatural Horror", "Mystery" ,"TW: Gore"] },
-        { title: "Movie 2", img: "wrongasset", desc: "Description for Movie 2.", tags: ["Drama", "Romance"] },
-        { title: "Movie 3", img: "assets/jack.jpg", desc: "Description for Movie 3.", tags: ["Comedy", "Family"] },
-        { title: "Movie 4", img: "assets/jack.jpg", desc: "Description for Movie 4.", tags: ["Horror", "Supernatural"] },
-        { title: "Movie 5", img: "assets/jack.jpg", desc: "Description for Movie 5.", tags: ["Sci-Fi", "Adventure"] },
-        { title: "Movie 6", img: "assets/jack.jpg", desc: "Description for Movie 6.", tags: ["Mystery", "Crime"] },
-        { title: "Movie 7", img: "assets/jack.jpg", desc: "Description for Movie 7.", tags: ["Fantasy", "Epic"] },
-        { title: "Movie 8", img: "assets/jack.jpg", desc: "Description for Movie 8.", tags: ["Animation", "Kids"] },
-        { title: "Movie 9", img: "assets/jack.jpg", desc: "Description for Movie 9.", tags: ["Documentary"] },
-        { title: "Movie 10", img: "assets/jack.jpg", desc: "Description for Movie 10.", tags: ["Action", "Adventure"] },
-        { title: "Movie 11", img: "assets/jack.jpg", desc: "Description for Movie 11.", tags: ["Drama"] },
-        { title: "Movie 12", img: "assets/jack.jpg", desc: "Description for Movie 12.", tags: ["Romance", "Comedy"] },
-        { title: "Movie 13", img: "assets/jack.jpg", desc: "Description for Movie 13.", tags: ["Thriller"] },
-        { title: "Movie 14", img: "assets/jack.jpg", desc: "Description for Movie 14.", tags: ["Horror"] },
-        { title: "Movie 15", img: "assets/jack.jpg", desc: "Description for Movie 15.", tags: ["Action", "Sci-Fi"] }
-      ];
-
+      const movies = window.movies;
       let activeIndex = 0;
       const carousel = document.getElementById('carousel');
       const descBox = document.getElementById('carousel-description');
@@ -46,12 +34,12 @@
       function setupCarousel() {
         movies.forEach((movie, idx) => {
           const li = document.createElement('li');
-          li.className = 'relative cursor-pointer overflow-hidden rounded-2xl bg-gray-300 flex-1 group transition-[flex] duration-[900ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] h-[600px]';
-          li.style.height = '600px';
+          li.className = 'relative cursor-pointer overflow-hidden rounded-2xl flex-0.5 group transition-[flex] duration-[900ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] h-full min-w-[80px]';
+          li.style.height = '';
           li.dataset.idx = idx;
           li.innerHTML = `
             <img src="${movie.img}" alt="${movie.title}" class="object-cover w-full h-full pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] grayscale" onerror="this.onerror=null;this.src='assets/jack.jpg';" />
-            <div class="absolute bottom-4 left-0 w-full flex justify-center transition-all duration-[900ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] bg-white bg-opacity-70 rounded ${idx === activeIndex ? 'opacity-0 scale-95' : 'group-hover:opacity-100 opacity-0 scale-100'}">
+            <div class="absolute bottom-2 left-0 w-full flex justify-center transition-all duration-[900ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] bg-white bg-opacity-70 rounded ${idx === activeIndex ? 'opacity-0 scale-95' : 'group-hover:opacity-100 opacity-0 scale-100'}">
               <span class="pointer-events-none text-xs text-gray-600 text-center w-full block py-1">
                 ${movie.title}
               </span>
@@ -86,9 +74,12 @@
         Array.from(carousel.children).forEach((li, idx) => {
           const isActive = idx === activeIndex;
           const isHovering = li.classList.contains('hovering');
-          let flexClass = isActive ? 'flex-[5]' : (isHovering ? 'flex-[2]' : 'flex-[0.7]');
-          li.className = `relative cursor-pointer overflow-hidden rounded-2xl bg-gray-300 flex-1 group transition-[flex] duration-[900ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] h-[600px] ${flexClass}`;
-          li.style.height = '600px';
+          // Make the active item much wider, hovered inactive items wider, and shrink inactive items
+          let flexClass = isActive ? 'flex-[18]' : (isHovering ? 'flex-[5]' : 'flex-[0.4]');
+          let minW = isActive ? 'min-w-[400px]' : (isHovering ? 'min-w-[180px]' : 'min-w-[60px]');
+          let maxW = isActive ? 'max-w-[700px]' : (isHovering ? 'max-w-[250px]' : 'max-w-[120px]');
+          li.className = `relative cursor-pointer overflow-hidden rounded-2xl flex-0.5 group transition-[flex,min-width,max-width] duration-[900ms] ease-in-out h-full ${minW} ${maxW} ${flexClass}`;
+          li.style.height = '';
           const img = li.querySelector('img');
           if (img) {
             if (isActive) {
@@ -102,7 +93,7 @@
           }
           const titleDiv = li.querySelector('div');
           if (titleDiv) {
-            titleDiv.className = `absolute bottom-4 left-0 w-full flex justify-center transition-all duration-[900ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] bg-white bg-opacity-70 rounded ${isActive ? 'opacity-0 scale-95' : 'group-hover:opacity-100 opacity-0 scale-100'}`;
+            titleDiv.className = `absolute bottom-2 left-0 w-full flex justify-center transition-all duration-[900ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] bg-white bg-opacity-70 rounded ${isActive ? 'opacity-0 scale-95' : 'group-hover:opacity-100 opacity-0 scale-100'}`;
           }
           const span = li.querySelector('span');
           if (span) {
@@ -115,7 +106,7 @@
       function updateDescription() {
         // Show the title as a pseudo header in the description area
         const tags = movies[activeIndex].tags.map(tag => `<span class="inline-block bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded mr-2 mb-1">${tag}</span>`).join('');
-        descBox.innerHTML = `<span class="block text-2xl font-bold mb-2 transition-all duration-[900ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] opacity-0 scale-95" style="will-change:opacity,transform;">${movies[activeIndex].title}</span><span class="inline-block transition-all duration-[900ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] opacity-0 scale-95 mb-2" style="will-change:opacity,transform;">${movies[activeIndex].desc}</span><div class="mt-2">${tags}</div>`;
+        descBox.innerHTML = `<span class="block text-2xl font-bold mb-2 transition-all duration-[900ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] opacity-0 scale-95" style="will-change:opacity,transform;">${movies[activeIndex].title}</span><div class="mt-2 mb-2">${tags}</div><span class="inline-block transition-all duration-[900ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] opacity-0 scale-95 mb-2" style="will-change:opacity,transform;">${movies[activeIndex].desc}</span>`;
         setTimeout(() => {
           const spans = descBox.querySelectorAll('span');
           spans.forEach(span => {
@@ -132,7 +123,7 @@
     </main>
     <footer>
         <div class="jackenstein"></div>
-        <h1>Coomspook 2025 ©</h1>
+        <h1 class="mt-6">Coomspook 2025 ©</h1>
     </footer>
 </body>
 </html>
