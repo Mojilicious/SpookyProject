@@ -1,9 +1,138 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="UTF-8" />    
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />    
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
 <body>
+    <header>
+    </header>
+    <main>
+    <div class="flex items-center justify-center w-full" style="min-height:700px;">
+    <div class="w-[1600px] max-w-full">
+    <ul id="carousel" class="flex flex-row gap-2 h-[600px] mb-12">
+        <!-- Carousel items will be injected here -->
+    </ul>
+    <div id="carousel-description" class="mt-6 p-4 rounded shadow text-center text-lg min-h-[60px] transition-all duration-500"></div>
+    </div>
+    </div>
+    <script>
+      // --- Carousel Setup for Smooth Transitions ---
+      const movies = [
+        { title: "Weapons", img: "assets/weapons.jpg", desc: "So, do they turn into weapons or something funny...? <br><br> Test.", tags: ["Supernatural Horror", "Mystery" ,"TW: Gore"] },
+        { title: "Movie 2", img: "wrongasset", desc: "Description for Movie 2.", tags: ["Drama", "Romance"] },
+        { title: "Movie 3", img: "assets/jack.jpg", desc: "Description for Movie 3.", tags: ["Comedy", "Family"] },
+        { title: "Movie 4", img: "assets/jack.jpg", desc: "Description for Movie 4.", tags: ["Horror", "Supernatural"] },
+        { title: "Movie 5", img: "assets/jack.jpg", desc: "Description for Movie 5.", tags: ["Sci-Fi", "Adventure"] },
+        { title: "Movie 6", img: "assets/jack.jpg", desc: "Description for Movie 6.", tags: ["Mystery", "Crime"] },
+        { title: "Movie 7", img: "assets/jack.jpg", desc: "Description for Movie 7.", tags: ["Fantasy", "Epic"] },
+        { title: "Movie 8", img: "assets/jack.jpg", desc: "Description for Movie 8.", tags: ["Animation", "Kids"] },
+        { title: "Movie 9", img: "assets/jack.jpg", desc: "Description for Movie 9.", tags: ["Documentary"] },
+        { title: "Movie 10", img: "assets/jack.jpg", desc: "Description for Movie 10.", tags: ["Action", "Adventure"] },
+        { title: "Movie 11", img: "assets/jack.jpg", desc: "Description for Movie 11.", tags: ["Drama"] },
+        { title: "Movie 12", img: "assets/jack.jpg", desc: "Description for Movie 12.", tags: ["Romance", "Comedy"] },
+        { title: "Movie 13", img: "assets/jack.jpg", desc: "Description for Movie 13.", tags: ["Thriller"] },
+        { title: "Movie 14", img: "assets/jack.jpg", desc: "Description for Movie 14.", tags: ["Horror"] },
+        { title: "Movie 15", img: "assets/jack.jpg", desc: "Description for Movie 15.", tags: ["Action", "Sci-Fi"] }
+      ];
 
-<h1>My First Heading</h1>
-<p>My first paragraph.</p>
+      let activeIndex = 0;
+      const carousel = document.getElementById('carousel');
+      const descBox = document.getElementById('carousel-description');
 
+      // Create carousel items only once
+      function setupCarousel() {
+        movies.forEach((movie, idx) => {
+          const li = document.createElement('li');
+          li.className = 'relative cursor-pointer overflow-hidden rounded-2xl bg-gray-300 flex-1 group transition-[flex] duration-[900ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] h-[600px]';
+          li.style.height = '600px';
+          li.dataset.idx = idx;
+          li.innerHTML = `
+            <img src="${movie.img}" alt="${movie.title}" class="object-cover w-full h-full pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] grayscale" onerror="this.onerror=null;this.src='assets/jack.jpg';" />
+            <div class="absolute bottom-4 left-0 w-full flex justify-center transition-all duration-[900ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] bg-white bg-opacity-70 rounded ${idx === activeIndex ? 'opacity-0 scale-95' : 'group-hover:opacity-100 opacity-0 scale-100'}">
+              <span class="pointer-events-none text-xs text-gray-600 text-center w-full block py-1">
+                ${movie.title}
+              </span>
+            </div>
+          `;
+          li.onclick = () => {
+            if (activeIndex !== idx) {
+              setActiveIndex(idx);
+            }
+          };
+          li.onmouseover = () => {
+            if (idx !== activeIndex) li.classList.add('flex-[2]');
+            li.classList.add('hovering');
+            updateCarousel();
+          };
+          li.onmouseout = () => {
+            if (idx !== activeIndex) li.classList.remove('flex-[2]');
+            li.classList.remove('hovering');
+            updateCarousel();
+          };
+          carousel.appendChild(li);
+        });
+      }
+
+      function setActiveIndex(idx) {
+        activeIndex = idx;
+        updateCarousel();
+        updateDescription();
+      }
+
+      function updateCarousel() {
+        Array.from(carousel.children).forEach((li, idx) => {
+          const isActive = idx === activeIndex;
+          const isHovering = li.classList.contains('hovering');
+          let flexClass = isActive ? 'flex-[5]' : (isHovering ? 'flex-[2]' : 'flex-[0.7]');
+          li.className = `relative cursor-pointer overflow-hidden rounded-2xl bg-gray-300 flex-1 group transition-[flex] duration-[900ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] h-[600px] ${flexClass}`;
+          li.style.height = '600px';
+          const img = li.querySelector('img');
+          if (img) {
+            if (isActive) {
+              img.style.filter = 'none';
+            } else if (isHovering) {
+              img.style.filter = 'grayscale(85%)';
+            } else {
+              img.style.filter = 'grayscale(100%)';
+            }
+            img.className = `object-cover w-full h-full pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.22,0.61,0.36,1)]`;
+          }
+          const titleDiv = li.querySelector('div');
+          if (titleDiv) {
+            titleDiv.className = `absolute bottom-4 left-0 w-full flex justify-center transition-all duration-[900ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] bg-white bg-opacity-70 rounded ${isActive ? 'opacity-0 scale-95' : 'group-hover:opacity-100 opacity-0 scale-100'}`;
+          }
+          const span = li.querySelector('span');
+          if (span) {
+            span.className = 'pointer-events-none text-xs text-gray-600 text-center w-full block py-1';
+            span.textContent = movies[idx].title;
+          }
+        });
+      }
+
+      function updateDescription() {
+        // Show the title as a pseudo header in the description area
+        const tags = movies[activeIndex].tags.map(tag => `<span class="inline-block bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded mr-2 mb-1">${tag}</span>`).join('');
+        descBox.innerHTML = `<span class="block text-2xl font-bold mb-2 transition-all duration-[900ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] opacity-0 scale-95" style="will-change:opacity,transform;">${movies[activeIndex].title}</span><span class="inline-block transition-all duration-[900ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] opacity-0 scale-95 mb-2" style="will-change:opacity,transform;">${movies[activeIndex].desc}</span><div class="mt-2">${tags}</div>`;
+        setTimeout(() => {
+          const spans = descBox.querySelectorAll('span');
+          spans.forEach(span => {
+            span.classList.remove('opacity-0','scale-95');
+            span.classList.add('opacity-100','scale-100');
+          });
+        }, 10);
+      }
+
+      setupCarousel();
+      setActiveIndex(activeIndex);
+    </script>
+
+    </main>
+    <footer>
+        <div class="jackenstein"></div>
+        <h1>Coomspook 2025 ©</h1>
+    </footer>
 </body>
-</html> 
+</html>
