@@ -5,9 +5,9 @@
     Purple - #441752
     Black - #1B1833
     */
-    --bg-1: rgb(27, 24, 51);
+    --bg-1: rgb(34, 29, 75);
     --bg-2: rgb(27, 24, 51);
-    --bg-main: rgb(95, 41, 111);
+    --bg-main: rgb(51, 1, 56);
     --bg-transparent: rgba(255, 255, 255, 0);
     --text-orange: #F29F58;
 }
@@ -49,8 +49,70 @@ footer {
     bottom: 0;
 }
 
+.carousel-item-box {
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    position: absolute;
+    bottom: 0.5rem; 
+    left: 0;
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    transition: all 900ms cubic-bezier(0.22, 0.61, 0.36, 1); 
+    border-radius: 0.25rem; 
+}
+
+.carousel-title {
+    pointer-events: none;
+    font-size: 0.75rem; 
+    letter-spacing: 0.2rem;
+    color: rgb(88, 103, 123);
+    text-align: center;
+    width: 100%; 
+    display: block; 
+    padding-top: 0.25rem; 
+    padding-bottom: 0.25rem;
+}
+
+.turn-your-text-white {
+    color: white !important; /* dont do this at home kids */
+}
+
+.tags {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+.tag-item {
+    display: inline-block;            
+    background-color: rgb(229, 231, 235); 
+    color: rgb(55, 65, 81);        
+    font-size: 0.75rem;
+    padding-left: 0.5rem;            
+    padding-right: 0.5rem;
+    padding-top: 0.25rem;           
+    padding-bottom: 0.25rem;
+    border-radius: 0.25rem;  
+    transform: scale(0.95);            
+    transition: all 200ms ease-in;
+}
+
+#carousel-description-box {
+    background-color: var(--bg-transparent);
+    border-color:red;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
 .text-orange {
     color: var(--text-orange);
+}
+
+.spoiler-tag-explain {
+    font-size: 0.75rem;
+    color: rgb(200, 200, 200);
+    margin-top: 1rem;
+    font-style: italic;
 }
 
 .jackenstein {
