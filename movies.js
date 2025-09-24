@@ -3,7 +3,7 @@ window.movies = [
     img: "assets/weapons.jpg", 
     desc: "When all but one child from the same class mysteriously vanish on the same night at exactly the same time, a community is left questioning who or what is behind their disappearance.", 
     tags: ["Horror", "Supernatural", "Mystery"], 
-    spoilers: "Trigger Warnings: Gore, Child Abuse, Drug Addiction <br><br> \"there are absolutely no weapons in this film they lied :(\"- Moji" },
+    spoilers: "Trigger Warnings: Gore, Child Abuse, Substance <br><br> \"there are absolutely no weapons in this film they lied :(\"- Moji" },
   { title: "Together (2025)", 
     img: "assets/together.jpg", 
     desc: "Years into their relationship, Tim and Millie find themselves at a crossroads as they move to the country. With tensions already flaring, an encounter with an unnatural force threatens to corrupt their lives, their love and their flesh.", 

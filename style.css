@@ -7,7 +7,7 @@
     */
     --bg-1: rgb(34, 29, 75);
     --bg-2: rgb(27, 24, 51);
-    --bg-3: rgba(42, 0, 0, 0.89);
+    --bg-3: rgba(75, 40, 24, 0.89);
     --bg-main: rgb(51, 1, 56);
     --bg-transparent: rgba(255, 255, 255, 0);
     --text-orange: #F29F58;
@@ -100,9 +100,7 @@ footer {
 }
 
 #carousel-description-box {
-    /* background-color: white;
-    border-color:red;
-    border-radius: 8px; */
+    background-color: rgb(0, 0, 0);
 }
 
 #carousel-description {
@@ -157,17 +155,6 @@ footer {
   font-size: 1.25rem;
 }
 
-.movie-desc::after {
-  content: "";
-  position: absolute;
-  top: -12px;   /* now it’s above the box */
-  right: 400px;  /* keep it aligned to the right */
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-bottom: 15px solid rgb(87, 82, 82); /* point downwards */
-}
 .spoiler-box {
     background-color: rgba(54, 0, 0, 0.932);
     border: red;
