@@ -12,7 +12,7 @@
 <body>
         <!-- Will you go away if I show you a secret? -->
 
-        <!-- Of which there are none! Now, shoo! We're all busy here!! Now, scram! -->
+        <!-- Of which there are none! Now, shoo! We're all busy here!! SCRAM!!! -->
     <main>
 
     <div class="flex items-center justify-center w-full min-h-screen px-2">
@@ -24,7 +24,7 @@
         
     </div>
                 <div id="carousel-description-box">
-              <div id="carousel-description" class="fade-wrapper"></div>
+              <div id="carousel-description"></div>
             </div>
     <script src="movies.js"></script>
   <script>
@@ -152,8 +152,10 @@
       }
 
       function updateDescription() {
+        descBox.classList.remove('visible');
+        setTimeout(() => {
         // Show the title as a pseudo header in the description area
-        const tags = movies[activeIndex].tags.map(tag => `<span class="tag-item tag-animate">${tag}</span>`).join('');
+        const tags = movies[activeIndex].tags.map(tag => `<span class="tag-item">${tag}</span>`).join('');
         descBox.innerHTML = `
         <div class="movie-total">
         <span class="movie-title">${movies[activeIndex].title}</span>
@@ -163,13 +165,16 @@
         <details class="spoiler-box">
         <summary class="spoiler-title">!!SPOILERS!! CLICK ME, if you dare!! :3</summary>
         <p class="spoiler-content">${movies[activeIndex].spoilers}</p></details>
-        <div class="spoiler-tag-explain">The section above contains trigger warnings and comments about the film. <br>Please be advised of potential spoilers.</div>`;
+        <div class="spoiler-tag-explain">The section above contains the film's trigger warnings and the screenor's comments. <br>Please be advised of potential spoilers.</div>`; 
+        
+          descBox.classList.add('visible');
+        }, 600); 
       }
 
       setupCarousel();
       setActiveIndex(activeIndex);
+      
     </script>
-
     </main>
 </body>
 </html>
