@@ -58,7 +58,7 @@ window.movies = [
     img: "assets/jack.jpg", 
     desc: "The most handsome and beautiful ghastly creature of the hallowed eves. They love long walks on the beach, and trick or treating.", 
     tags: ["Romance", "Comedy", "Spooky"], 
-    spoilers: "Trigger Warnings: None! <br><br> \"Omg, you've chosen me!!! Yes, please vote for me in the list!!\" - The Spookmaster <div class=\"jackenstein\"></div>"},
+    spoilers: "Trigger Warnings: None! <br><br> \"Omg, you've chosen me!!! Yes, please vote for me in the list!!\" - The Spookmaster <br><br> P.S. You cannot vote for The Spookmaster (2025). <div class=\"jackenstein\"></div>"},
   // { title: "Movie 13", 
   //   img: "assets/jack.png", 
   //   desc: "Description for Movie 13.", 
