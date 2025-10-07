@@ -311,7 +311,6 @@ footer {
 }
 
 .jackenstein {
-    opacity: 0;
     background-image: url(assets/deltarune-jackenstein.gif);
     background-repeat: repeat-x;
     background-size: auto 50px;
