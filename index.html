@@ -15,9 +15,9 @@
         <!-- Of which there are none! Now, shoo! We're all busy here!! SCRAM!!! -->
     <main>
 
-    <div class="flex items-center justify-center w-full min-h-screen px-2">
-        <div class="w-full max-w-[1400px]">
-            <ul id="carousel" class="flex flex-row gap-0.5 h-[70vw] max-h-[650px] min-h-[250px] mb-8 md:h-[650px] md:max-h-[700px] md:min-h-[450px] lg:h-[700px] lg:max-h-[800px] lg:min-h-[500px]">
+    <div class="container">
+        <div class="wrapper">
+            <ul id="carousel" class="box">
                 <!-- Carousel items will be injected here -->
             </ul>
         </div>
@@ -152,10 +152,6 @@
       }
 
       function updateDescription() {
-        window.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: 'smooth'
-        });
         descBox.classList.remove('visible');
         setTimeout(() => {
         // Show the title as a pseudo header in the description area
