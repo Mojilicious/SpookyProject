@@ -38,11 +38,11 @@
       function setupCarousel() {
         movies.forEach((movie, idx) => {
           const li = document.createElement('li');
-          li.className = 'relative cursor-pointer overflow-hidden rounded-2xl flex-0.5 group transition-[flex] duration-[900ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] h-full min-w-[80px]';
+          li.className = 'card-item';
           li.style.height = '';
           li.dataset.idx = idx;
           li.innerHTML = `
-            <img src="${movie.img}" alt="${movie.title}" class="object-cover w-full h-full pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] grayscale" onerror="this.onerror=null;this.src='assets/jack.jpg';" />
+            <img src="${movie.img}" alt="${movie.title}" />
             <div class="carousel-item-box" data-overlay="${idx}">
               <span class="carousel-title" data-idx="${idx}">
                 #${idx+1}
@@ -55,39 +55,11 @@
             }
           };
           li.onmouseover = () => {
-            if (idx !== activeIndex) li.classList.add('flex-[1.5]');
-            li.classList.add('hovering');
-            // Animate text out, then change, then animate in
-            if (idx !== activeIndex) {
-              const span = li.querySelector('.carousel-title');
-              if (span) {
-                span.classList.remove('opacity-100','scale-100');
-                span.classList.add('opacity-0','scale-95','transition-all','duration-200','ease-in');
-                setTimeout(() => {
-                  span.textContent = movies[idx].title;
-                  span.classList.remove('opacity-0','scale-95');
-                  span.classList.add('opacity-100','scale-100', 'turn-your-text-white');
-                }, 120);
-              }
-            }
+            if (idx !== activeIndex) li.classList.add('is-hovering');
             updateCarousel();
           };
           li.onmouseout = () => {
-            if (idx !== activeIndex) li.classList.remove('flex-[1.5]');
-            li.classList.remove('hovering');
-            // Animate text out, then change, then animate in
-            if (idx !== activeIndex) {
-              const span = li.querySelector('.carousel-title');
-              if (span) {
-                span.classList.remove('opacity-100','scale-100');
-                span.classList.add('opacity-0','scale-95','transition-all','duration-200','ease-in');
-                setTimeout(() => {
-                  span.textContent = `#${idx+1}`;
-                  span.classList.remove('opacity-0','scale-95', 'turn-your-text-white');
-                  span.classList.add('opacity-100','scale-100');
-                }, 120);
-              }
-            }
+            li.classList.remove('is-hovering');
             updateCarousel();
           };
           carousel.appendChild(li);
@@ -102,52 +74,17 @@
 
       function updateCarousel() {
         Array.from(carousel.children).forEach((li, idx) => {
-          const isActive = idx === activeIndex;
-          const isHovering = li.classList.contains('hovering');
-          // Make the active item much wider, hovered inactive items wider, and shrink inactive items
-          let flexClass = isActive ? 'flex-[1]' : (isHovering ? 'flex-[1]' : 'flex-[0.2]');
-          let minW = isActive ? 'min-w-[400px]' : (isHovering ? 'min-w-[180px]' : 'min-w-[60px]');
-          let maxW = isActive ? 'max-w-[700px]' : (isHovering ? 'max-w-[250px]' : 'max-w-[120px]');
-          li.className = `relative cursor-pointer overflow-hidden rounded-2xl flex-0.5 group transition-[flex,min-width,max-width] duration-[900ms] ease-in-out h-full ${minW} ${maxW} ${flexClass}`;
-          li.style.height = '';
-          const img = li.querySelector('img');
-          if (img) {
-            if (isActive) {
-              img.style.filter = 'none';
-            } else if (isHovering) {
-              img.style.filter = 'grayscale(85%)';
-            } else {
-              img.style.filter = 'grayscale(100%)';
-            }
-            img.className = `object-cover w-full h-full pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.22,0.61,0.36,1)]`;
-          }
-          // Update the overlay: always visible for inactive, hidden for active
-          const overlayDiv = li.querySelector('[data-overlay]');
-          if (overlayDiv) {
-            if (isActive) {
-              overlayDiv.classList.remove('opacity-0', 'scale-95');
-            } else {
-              overlayDiv.classList.add('opacity-100', 'scale-100');
-            }
-          }
-          // Update the overlay span: always show number unless active (hidden). Hovered text is handled in mouse handlers only.
-          const span = li.querySelector('.carousel-title');
-          if (span) {
-            span.className = 'pointer-events-none text-xs text-center w-full block py-1 carousel-title transition-all duration-200 ease-in';
-            // Only update text if not hovered and not active
-            if (!isActive && !li.classList.contains('hovering')) {
-              if (span.textContent !== `#${idx+1}`) {
-                span.classList.remove('opacity-100','scale-100');
-                span.classList.add('opacity-0','scale-95');
-                setTimeout(() => {
-                  span.textContent = `#${idx+1}`;
-                  span.classList.remove('opacity-0','scale-95');
-                  span.classList.add('opacity-100','scale-100');
-                }, 120);
-              }
-            }
-            // If hovering and not active, mouseover handler will update the text
-          }
+        const isActive = idx === activeIndex;
+        const isHovering = li.classList.contains('is-hovering');
+        li.classList.remove('is-active', 'is-hovering', 'is-inactive');
+
+        if (isActive) {
+          li.classList.add('is-active');
+        } else if (isHovering) {
+          li.classList.add('is-hovering');
+        } else {
+          li.classList.add('is-inactive');
+        }
         });
       }
 
