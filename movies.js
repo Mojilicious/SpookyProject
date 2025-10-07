@@ -8,7 +8,7 @@ window.movies = [
     img: "assets/together.jpg", 
     desc: "Years into their relationship, Tim and Millie find themselves at a crossroads as they move to the country. With tensions already flaring, an encounter with an unnatural force threatens to corrupt their lives, their love and their flesh.", 
     tags: ["Body Horror", "Supernatural", "Romance??"], 
-    spoilers: "Trigger Warnings: VERY Graphic Body horror, Sexual Content <br><br> \"PEENAR SHOWED\"- Kelly"},
+    spoilers: "Trigger Warnings: VERY Graphic Body horror, Sexual Content <br><br> \"clean body horror a la The Substance\"- Kelly"},
   { title: "Bring Her Back (2025)", 
     img: "assets/bringherback.jpg", 
     desc: "A brother and sister uncover a terrifying ritual at the secluded home of their new foster mother.", 
